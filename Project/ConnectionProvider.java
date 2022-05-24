@@ -1,0 +1,22 @@
+package Project;
+
+import java.sql.*;
+
+public class ConnectionProvider {
+	public static Connection getCon() {
+		
+		try {
+			
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms", "root", "root");
+			return con;
+			
+		}
+		
+		catch (Exception e) {
+			
+			System.out.println(e);
+			return null;
+		
+		}
+	}
+}
