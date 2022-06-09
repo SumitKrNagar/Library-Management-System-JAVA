@@ -20,6 +20,7 @@ class Logout implements Frame {
 				bm6.setBounds(0, 0, 0, 0);
 				bm7.setBounds(0, 0, 0, 0);
 				bm8.setBounds(0, 0, 0, 0);
+				bm9.setBounds(0, 0, 0, 0);
 				lo.setBounds(0, 0, 0, 0);
 				
 				la.setBounds(0, 0, 0, 0);
