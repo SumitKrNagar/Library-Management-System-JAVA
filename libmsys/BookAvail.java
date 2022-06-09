@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class BookAvail implements Frame {
+class BookAvail extends Main implements Frame {
 	JFrame j = new JFrame();
 	JPanel pn = new JPanel();
 	JLabel[] label;
@@ -111,7 +111,7 @@ class BookAvail implements Frame {
 						String pub = ta2.getText();
 						String pubyr = ta3.getText();
 						
-						int count = 0;
+						int count = 1;
 	
 						if (bn.equals("") || pub.equals("") || pubyr.equals("")) {
 							
@@ -126,7 +126,7 @@ class BookAvail implements Frame {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 								
-								ResultSet rs = st.executeQuery("SELECT s_no FROM books WHERE book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"' ");
+								ResultSet rs = st.executeQuery("SELECT s_no FROM "+user+"books WHERE book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"' ");
 								while(rs.next()) {
 									count++;
 									if(count > 1)
@@ -138,7 +138,7 @@ class BookAvail implements Frame {
 													
 								if(count > 0) {
 									
-									ResultSet rs2 = st.executeQuery("SELECT book_id, admission_no FROM issue WHERE book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'");
+									ResultSet rs2 = st.executeQuery("SELECT book_id, admission_no FROM "+user+"issue WHERE book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'");
 									c = String.valueOf(count);
 									String s = c+" BOOK AVAILABLE BUT";
 									String s2;
@@ -171,7 +171,8 @@ class BookAvail implements Frame {
 							}
 							
 							catch(Exception ba) {
-								JOptionPane.showMessageDialog(null, "AN ERROR HAS OCCURED", "OOPS !!", JOptionPane.ERROR_MESSAGE);	
+								//JOptionPane.showMessageDialog(null, "AN ERROR HAS OCCURED", "OOPS !!", JOptionPane.ERROR_MESSAGE);
+								System.out.print(ba);
 								
 							}
 							
@@ -183,14 +184,14 @@ class BookAvail implements Frame {
 							
 								pn.setLayout(null);
 							
-								for(int i = 0; i < count; i++) {
-									label[i] = new JLabel();
-									label[i].setText(sarr[i]);
-									label[i].setForeground(Color.WHITE);
-									label[i].setFont(new Font("Serif", Font.BOLD, 12));
-									label[i].setBounds(70, k, 400, 20);
+								for(int z = 0; z < count; z++) {
+									label[z] = new JLabel();
+									label[z].setText(sarr[z]);
+									label[z].setForeground(Color.WHITE);
+									label[z].setFont(new Font("Serif", Font.BOLD, 12));
+									label[z].setBounds(70, k, 400, 20);
 									k = k + 25;
-									pn.add(label[i]);
+									pn.add(label[z]);
 								
 								}
 							

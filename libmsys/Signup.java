@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class Signup implements Frame {
+class Signup extends Main implements Frame {
 	
 	Signup (){
 				
@@ -192,7 +192,10 @@ class Signup implements Frame {
 							Statement st = con.createStatement();
 						
 							st.executeUpdate("INSERT INTO signup VALUES('"+uid+"', '"+pass+"')");
-						
+							st.execute("CREATE TABLE "+uid+"books (s_no int primary key, book_id int, book_name varchar(30), publisher varchar (30), published_year varchar(30), price int)");
+							st.execute("CREATE TABLE "+uid+"issue (s_no int primary key, book_id int, book_name varchar(30), publisher varchar (30), published_year varchar(30), admission_no int, issue_date varchar(30))");
+							st.execute("CREATE TABLE "+uid+"students (admission_no int, name varchar(30), father_name varchar(30), phone_no int)");
+							
 							JOptionPane.showMessageDialog(null, "YOU HAVE SUCCESSFULLY SIGNED UP", "NICE !!", JOptionPane.INFORMATION_MESSAGE);	
 						
 						}

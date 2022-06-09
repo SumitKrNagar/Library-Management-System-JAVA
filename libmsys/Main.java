@@ -13,6 +13,7 @@ import java.sql.*;
 import Project.ConnectionProvider;
 
 class Main implements Frame{
+	static String user;
 	public static void main(String[] args) {
 		
 		@SuppressWarnings("unused")
@@ -80,6 +81,7 @@ class Main implements Frame{
 						ResultSet rs = st.executeQuery("SELECT * FROM signup WHERE userid = '"+uid+"' AND password = '"+pass+"' ");
 						
 						if(rs.next()) {
+							user = uid;
 							
 							@SuppressWarnings("unused")
 							Menu m = new Menu();

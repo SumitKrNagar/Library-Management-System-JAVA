@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class DeleteBook implements Frame {
+class DeleteBook extends Main implements Frame {
 	
 	DeleteBook(){
 		
@@ -118,7 +118,7 @@ class DeleteBook implements Frame {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 							
-								st.executeUpdate("DELETE FROM books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'");
+								st.executeUpdate("DELETE FROM "+user+"books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'");
 							
 								JOptionPane.showMessageDialog(null, "BOOK DELETED SUCCESSFULLY", "DELETED !!", JOptionPane.INFORMATION_MESSAGE);
 							

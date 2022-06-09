@@ -15,7 +15,7 @@ import java.util.Date;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class IssueBook implements Frame {
+class IssueBook extends Main implements Frame {
 	
 	IssueBook(){
 		
@@ -163,7 +163,7 @@ class IssueBook implements Frame {
 						String dd = ta6.getText();
 						
 						Date d = new Date();
-						SimpleDateFormat form = new SimpleDateFormat("yyyy/MM//dd");
+						SimpleDateFormat form = new SimpleDateFormat("yyyy/MM/dd");
 						String id = form.format(d);
 						
 						if (bid.equals("") || bn.equals("") || pub.equals("") || pubyr.equals("") || adno.equals("") || id.equals("") || dd.equals("")) 
@@ -177,15 +177,15 @@ class IssueBook implements Frame {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 								
-								ResultSet rs = st.executeQuery("SELECT admission_no FROM students WHERE admission_no = '"+adno+"' "); 
+								ResultSet rs = st.executeQuery("SELECT admission_no FROM "+user+"students WHERE admission_no = '"+adno+"' "); 
 								
 								if(rs.next()) {
 									
-									ResultSet rs2 = st.executeQuery("SELECT s_no FROM books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"' ");
+									ResultSet rs2 = st.executeQuery("SELECT s_no FROM "+user+"books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"' ");
 									
 									if(rs2.next()) {
 										
-											st.executeUpdate("INSERT INTO issue VALUES ((SELECT s_no FROM books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'), '"+bid+"', '"+bn+"', '"+pub+"', '"+pubyr+"', '"+adno+"','"+id+"', '"+dd+"')  ");
+											st.executeUpdate("INSERT INTO "+user+"issue VALUES ((SELECT s_no FROM "+user+"books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'), '"+bid+"', '"+bn+"', '"+pub+"', '"+pubyr+"', '"+adno+"','"+id+"', '"+dd+"')  ");
 									
 											JOptionPane.showMessageDialog(null, "BOOK HAS BEEN ISSUED", "GREAT !!", JOptionPane.INFORMATION_MESSAGE);
 										
@@ -208,7 +208,7 @@ class IssueBook implements Frame {
 							
 							catch(Exception i) {
 								
-								JOptionPane.showMessageDialog(null, "BOOK ALEARDY ISSUED TO SOMEONE", "OOPS !!", JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(null, i, "OOPS !!", JOptionPane.WARNING_MESSAGE);
 								
 							}
 						

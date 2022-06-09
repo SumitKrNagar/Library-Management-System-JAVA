@@ -56,18 +56,17 @@ interface Frame {
 	JButton bds = new JButton();
 	JButton cs = new JButton();
 	
-	
 	Border bord = BorderFactory.createLineBorder(new Color(150, 78, 2), 3);
 	Border bor = BorderFactory.createLineBorder(new Color(150, 78, 2), 1);
 	Border bo = BorderFactory.createLineBorder(new Color(150, 78, 2), 5);
 
-	ImageIcon ic = new ImageIcon("menublur.jpg");
+	ImageIcon ic = new ImageIcon("images\\menublur.jpg");
 	
 	static void f() {
 		
 		jf.setTitle("LIBRARY MANAGER");
 		
-		ImageIcon ic = new ImageIcon("icon.png");
+		ImageIcon ic = new ImageIcon("images\\books.png");
 		jf.setIconImage(ic.getImage());
 		
 		jf.setSize(1920, 1080);

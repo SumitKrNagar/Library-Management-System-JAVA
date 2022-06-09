@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class DeleteStudent implements Frame {
+class DeleteStudent extends Main implements Frame {
 	
 	DeleteStudent(){
 		
@@ -92,10 +92,10 @@ class DeleteStudent implements Frame {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 								
-								ResultSet rs = st.executeQuery("SELECT * FROM students WHERE admission_no = '"+sadm+"' ");
+								ResultSet rs = st.executeQuery("SELECT * FROM "+user+"students WHERE admission_no = '"+sadm+"' ");
 								
 								if(rs.next()) {
-									st.executeUpdate("DELETE FROM students where admission_no = '"+sadm+"'");								
+									st.executeUpdate("DELETE FROM "+user+"students where admission_no = '"+sadm+"'");								
 									JOptionPane.showMessageDialog(null, "STUDENT DELETED SUCCESSFULLY", "DELETED !!", JOptionPane.INFORMATION_MESSAGE);
 									
 								}

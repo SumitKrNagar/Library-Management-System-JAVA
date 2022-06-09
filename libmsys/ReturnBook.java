@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import Project.ConnectionProvider;
 
-class ReturnBook implements Frame {
+class ReturnBook extends Main implements Frame {
 	
 	ReturnBook(){
 		
@@ -129,7 +129,7 @@ class ReturnBook implements Frame {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 								
-								ResultSet rs = st.executeQuery("SELECT issue_date, due_date FROM issue WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pyr+"' AND admission_no = '"+adn+"' ");
+								ResultSet rs = st.executeQuery("SELECT issue_date, due_date FROM "+user+"issue WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pyr+"' AND admission_no = '"+adn+"' ");
 								
 								if(rs.next()) {
 									
@@ -146,7 +146,7 @@ class ReturnBook implements Frame {
 									else if(d1.compareTo(d2) < 0)
 										JOptionPane.showMessageDialog(null, "BOOK HAS BEEN RETURNED BUT DUE DATE IS EXPIRED \nISSUED DATE WAS "+d3+"\nDUE DATE WAS "+d1, "LATE", JOptionPane.WARNING_MESSAGE);
 									
-									st.executeUpdate("DELETE FROM issue WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pyr+"' AND admission_no = '"+adn+"' ");
+									st.executeUpdate("DELETE FROM "+user+"issue WHERE book_id = '"+bid+"' AND book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pyr+"' AND admission_no = '"+adn+"' ");
 								
 								}
 								

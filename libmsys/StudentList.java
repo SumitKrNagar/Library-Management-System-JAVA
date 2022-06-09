@@ -4,15 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class StudentList implements Frame {
+class StudentList extends Main implements Frame {
 	
 	StudentList(){
 		
@@ -94,76 +92,7 @@ class StudentList implements Frame {
 				cs.setBorder(bor);
 				cs.setFocusable(false);
 				
-				MouseListener m = new MouseListener() {
-
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						ta2.setText("");
-						ta3.setText("");
-						
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseExited(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}};	
-					
-				ta.addMouseListener(m);
-				
-				MouseListener m2 = new MouseListener() {
-
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						ta.setText("");
-						
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseExited(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}};
-					
-				ta2.addMouseListener(m2);
-				ta3.addMouseListener(m2);
-				
+							
 				ActionListener ab = new ActionListener() {
 
 					@Override
@@ -186,20 +115,29 @@ class StudentList implements Frame {
 								
 								
 								if (!adm.equals("") && name.equals("") && fname.equals("")) {
-									 rs = st.executeQuery("SELECT name, father_name, phone_no FROM students WHERE admission_no = '"+adm+"' ");
+									 rs = st.executeQuery("SELECT name, father_name, phone_no FROM "+user+"students WHERE admission_no = '"+adm+"' ");
 									 flag = true;
 									 
 								}
 								else if(adm.equals("") && !name.equals("") && !fname.equals("")) { 	
-									rs = st.executeQuery("SELECT admission_no, phone_no FROM students WHERE name = '"+name+"' AND father_name = '"+fname+"' ");
+									rs = st.executeQuery("SELECT admission_no, phone_no FROM "+user+"students WHERE name = '"+name+"' AND father_name = '"+fname+"' ");
 									
 								}	
+								else if(!adm.equals("") && !name.equals("") && !fname.equals(""))
+									JOptionPane.showMessageDialog(null, "YOU HAVE TO FILL EITHER ADMISSION NO. OR NAME AND FATHER'S NAME", "OOPS !!", JOptionPane.WARNING_MESSAGE);
+								
+								else if(!adm.equals("") && !name.equals("") || fname.equals(""))
+									JOptionPane.showMessageDialog(null, "YOU HAVE TO FILL EITHER ADMISSION NO. OR NAME AND FATHER'S NAME", "OOPS !!", JOptionPane.WARNING_MESSAGE);
+								
 								else if(adm.equals("") && name.equals("") && fname.equals(""))
 									JOptionPane.showMessageDialog(null, "ALL FIELDS ARE EMPTY\nYOU MUST FILL EITHER ADMISSION NO. OR NAME AND FATHER'S NAME", "OOPS !!", JOptionPane.WARNING_MESSAGE);
 								
-								else if(adm.equals("") && !name.equals("") || !fname.equals(""))
-									JOptionPane.showMessageDialog(null, "YOU HAVE TO FILL NAME AND FATHER'S NAME", "INCOMPLETE DETAILS !!", JOptionPane.WARNING_MESSAGE);
-									 
+								else if(adm.equals("") && !name.equals("") || fname.equals(""))
+									JOptionPane.showMessageDialog(null, "YOU HAVE TO FILL BOTH NAME AND FATHER'S NAME", "INCOMPLETE DETAILS !!", JOptionPane.WARNING_MESSAGE);
+								
+								else if(adm.equals("") && name.equals("") || !fname.equals(""))
+									JOptionPane.showMessageDialog(null, "YOU HAVE TO FILL BOTH NAME AND FATHER'S NAME", "INCOMPLETE DETAILS !!", JOptionPane.WARNING_MESSAGE);
+								
 									
 									
 								if(flag == true) {
@@ -208,7 +146,7 @@ class StudentList implements Frame {
 										fn = rs.getString("father_name");
 										pn = rs.getInt("phone_no");
 									
-										rs2 = st.executeQuery("SELECT * FROM issue WHERE admission_no = '"+adm+"'");
+										rs2 = st.executeQuery("SELECT * FROM "+user+"issue WHERE admission_no = '"+adm+"'");
 									}
 									else
 										JOptionPane.showMessageDialog(null, "STUDENT RECORD NOT FOUND", "OOPS !!", JOptionPane.WARNING_MESSAGE);
@@ -220,7 +158,7 @@ class StudentList implements Frame {
 										fn = fname;
 										pn = rs.getInt("phone_no");
 										
-										rs2 = st.executeQuery("SELECT * FROM issue WHERE admission_no = '"+adm+"'");
+										rs2 = st.executeQuery("SELECT * FROM "+user+"issue WHERE admission_no = '"+adm+"'");
 									}
 									else
 										JOptionPane.showMessageDialog(null, "STUDENT RECORD NOT FOUND", "OOPS !!", JOptionPane.WARNING_MESSAGE);
@@ -229,7 +167,7 @@ class StudentList implements Frame {
 										
 										
 								if(rs2.next()) {
-									ResultSet rs3 = st.executeQuery("SELECT book_id, book_name, publisher FROM books WHERE s_no = (SELECT book_sno FROM issue WHERE admission_no = '"+adm+"' )");
+									ResultSet rs3 = st.executeQuery("SELECT book_id, book_name, publisher FROM "+user+"books WHERE s_no = (SELECT s_no FROM "+user+"issue WHERE admission_no = '"+adm+"' )");
 									if(rs3.next()) {
 										String bid = rs3.getString("book_id");
 										String bn = rs3.getString("book_name");

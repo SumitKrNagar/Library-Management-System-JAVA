@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class AddStudent implements Frame {
+class AddStudent extends Main implements Frame  {
 	
 	AddStudent(){
 		
@@ -120,7 +120,7 @@ class AddStudent implements Frame {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 								
-								st.executeUpdate("INSERT INTO students values ('"+adm+"', '"+n+"', '"+fname+"', '"+pno+"')");
+								st.executeUpdate("INSERT INTO "+user+"students values ('"+adm+"', '"+n+"', '"+fname+"', '"+pno+"')");
 								
 								JOptionPane.showMessageDialog(null, "STUDENT ADDED SUCCESSFULLY", "GREAT !!", JOptionPane.INFORMATION_MESSAGE);
 								

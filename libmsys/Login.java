@@ -16,12 +16,11 @@ class Login implements Frame{
 		
 		lb.setBounds(0, 0, 0, 0);
 		lb2.setBounds(0, 0, 0, 0);
-		bm9.setBounds(0, 0, 0, 0);
 		
 		l.remove(l3);
 		bs.setBounds(0, 0, 0, 0);
 				
-		ImageIcon i = new ImageIcon("welcomeblur.png");
+		ImageIcon i = new ImageIcon("images\\welcomeblur.png");
 		l.setIcon(i);
 				
 		p.setBounds(590, 270, 390, 285);

@@ -8,7 +8,7 @@ class Welcome implements Frame {
 	
 	Welcome() {
 		
-		ImageIcon i = new ImageIcon("welcome.jpg");
+		ImageIcon i = new ImageIcon("images\\welcome.jpg");
 		
 		l.setSize(1920, 1080);
 		l.setIcon(i);

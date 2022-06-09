@@ -8,7 +8,7 @@ class Menu implements Frame {
 	
 	Menu(){
 		
-		ImageIcon i = new ImageIcon("menu.jpg");
+		ImageIcon i = new ImageIcon("images\\menu.jpg");
 		l.setIcon(i);
 						
 		p.remove(ln);
@@ -104,7 +104,6 @@ class Menu implements Frame {
 		bm9.setForeground(new Color(150, 78,2));
 		bm9.setBorder(bord);
 		bm9.setFocusable(false);
-							
 					
 	}
 }

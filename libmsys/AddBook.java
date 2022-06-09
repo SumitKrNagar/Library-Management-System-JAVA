@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.sql.*;
 import Project.ConnectionProvider;
 
-class AddBook implements Frame {
+class AddBook extends Main implements Frame {
 	
 	AddBook() {
 			
@@ -131,14 +131,14 @@ class AddBook implements Frame {
 							Connection con = ConnectionProvider.getCon();
 							Statement st = con.createStatement();
 						
-							ResultSet rs = st.executeQuery("SELECT s_no FROM books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"'");
+							ResultSet rs = st.executeQuery("SELECT s_no FROM "+user+"books WHERE book_id = '"+bid+"' AND book_name = '"+bn+"'");
 							
 							if(rs.next())
 								JOptionPane.showMessageDialog(null, "BOOK ALREADY EXIST", "OOPS !!", JOptionPane.WARNING_MESSAGE);
 							
 							else {
 								
-								st.executeUpdate("INSERT INTO books (book_id, book_name, publisher, published_year, price) VALUES ('"+bid+"', '"+bn+"', '"+pub+"', '"+pubyr+"', '"+prc+"')");
+								st.executeUpdate("INSERT INTO "+user+"books (book_id, book_name, publisher, published_year, price) VALUES ('"+bid+"', '"+bn+"', '"+pub+"', '"+pubyr+"', '"+prc+"')");
 						
 								JOptionPane.showMessageDialog(null, "BOOK ADDED SUCCESSFULLY", "GREAT !!", JOptionPane.INFORMATION_MESSAGE);
 								
