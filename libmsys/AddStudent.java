@@ -120,10 +120,16 @@ class AddStudent extends Main implements Frame  {
 								Connection con = ConnectionProvider.getCon();
 								Statement st = con.createStatement();
 								
-								st.executeUpdate("INSERT INTO "+user+"students values ('"+adm+"', '"+n+"', '"+fname+"', '"+pno+"')");
+								ResultSet rs = st.executeQuery("SELECT * FROM "+user+"students WHERE admission_no = "+adm);
 								
-								JOptionPane.showMessageDialog(null, "STUDENT ADDED SUCCESSFULLY", "GREAT !!", JOptionPane.INFORMATION_MESSAGE);
+								if(rs.next()) {
+									JOptionPane.showMessageDialog(null, "THIS ADMISSION NO BELONGS TO SOMEONE ELSE ", "OOPS !!", JOptionPane.ERROR_MESSAGE);	
+								}
 								
+								else {
+									st.executeUpdate("INSERT INTO "+user+"students values ('"+adm+"', '"+n+"', '"+fname+"', '"+pno+"')");
+									JOptionPane.showMessageDialog(null, "STUDENT ADDED SUCCESSFULLY", "GREAT !!", JOptionPane.INFORMATION_MESSAGE);
+								}
 								
 							}
 							catch (Exception as) {

@@ -139,7 +139,7 @@ class BookAvail extends Main implements Frame {
 								if(count > 0) {
 									
 									ResultSet rs2 = st.executeQuery("SELECT book_id, admission_no FROM "+user+"issue WHERE book_name = '"+bn+"' AND publisher = '"+pub+"' AND published_year = '"+pubyr+"'");
-									c = String.valueOf(count);
+									c = String.valueOf(count - 1);
 									String s = c+" BOOK AVAILABLE BUT";
 									String s2;
 									
@@ -171,8 +171,8 @@ class BookAvail extends Main implements Frame {
 							}
 							
 							catch(Exception ba) {
-								//JOptionPane.showMessageDialog(null, "AN ERROR HAS OCCURED", "OOPS !!", JOptionPane.ERROR_MESSAGE);
-								System.out.print(ba);
+								JOptionPane.showMessageDialog(null, "AN ERROR HAS OCCURED", "OOPS !!", JOptionPane.ERROR_MESSAGE);
+			
 								
 							}
 							
@@ -190,7 +190,7 @@ class BookAvail extends Main implements Frame {
 									label[z].setForeground(Color.WHITE);
 									label[z].setFont(new Font("Serif", Font.BOLD, 12));
 									label[z].setBounds(70, k, 400, 20);
-									k = k + 25;
+									k = k + 20;
 									pn.add(label[z]);
 								
 								}
