@@ -110,7 +110,7 @@ class StudentList extends Main implements Frame {
 								ResultSet rs2 = null;
 								String n = null;
 								String fn = null;
-								int pn = 0;
+								long pn = 0;
 								Boolean flag = false;
 								
 								
@@ -144,7 +144,7 @@ class StudentList extends Main implements Frame {
 									if(rs.next()) {
 										n = rs.getString("name");
 										fn = rs.getString("father_name");
-										pn = rs.getInt("phone_no");
+										pn = rs.getLong("phone_no");
 									
 										rs2 = st.executeQuery("SELECT * FROM "+user+"issue WHERE admission_no = '"+adm+"'");
 									}
@@ -156,7 +156,7 @@ class StudentList extends Main implements Frame {
 										adm = rs.getString("admission_no");
 										n = name;
 										fn = fname;
-										pn = rs.getInt("phone_no");
+										pn = rs.getLong("phone_no");
 										
 										rs2 = st.executeQuery("SELECT * FROM "+user+"issue WHERE admission_no = '"+adm+"'");
 									}
